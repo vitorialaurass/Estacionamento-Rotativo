@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author 03909672035
@@ -20,9 +19,10 @@ public class VagaDAO {
     public void create(Vaga v){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        
+
         try{
             stmt = con.prepareStatement("INSERT INTO vaga (numero, rua, obliqua) VALUES (?,?,?) ");
+            stmt = con.prepareStatement("INSERT INTO vaga (numero, rua, obliqua) VALUES (?,?,?)");
             stmt.setInt(1, v.getNumero());
             stmt.setString(2, v.getRua());
             stmt.setBoolean(3, v.isObliqua());
