@@ -12,6 +12,7 @@ import model.dao.VagaDAO;
  */
 public class JFAtualizarVaga extends javax.swing.JFrame {
 
+    private static int idVaga;
     /**
      * Creates new form JFAtualizarVaga
      */
@@ -27,7 +28,7 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
         }else if(v.isObliqua( )== false){
             jRBParalela.setSelected(true);
         }
-
+        
 
     }
 
@@ -43,7 +44,6 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         bGTipoVaga = new javax.swing.ButtonGroup();
         jBtnSalvar = new javax.swing.JButton();
         jBtnLimpar = new javax.swing.JButton();
@@ -58,20 +58,15 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblIdVaga = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jBtnSalvar.setText("Salvar");
         jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnSalvarActionPerformed(evt);
             }
         });
-
         jBtnLimpar.setText("Limpar");
-
         jBtnCancelar.setText("Cancelar");
-
         bGTipoVaga.add(jRBParalela);
         jRBParalela.setFont(new java.awt.Font("Corbel Light", 0, 12)); // NOI18N
         jRBParalela.setText("Paralela");
@@ -80,24 +75,19 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
                 jRBParalelaActionPerformed(evt);
             }
         });
-
         bGTipoVaga.add(jRBObliqua);
         jRBObliqua.setFont(new java.awt.Font("Corbel Light", 0, 12)); // NOI18N
         jRBObliqua.setText("Obliqua");
-
         jLabel4.setFont(new java.awt.Font("Corbel Light", 0, 12)); // NOI18N
         jLabel4.setText("Tipo de Vaga ");
-
         jTFRua.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
         jTFRua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFRuaActionPerformed(evt);
             }
         });
-
         jLabel3.setFont(new java.awt.Font("Corbel Light", 0, 12)); // NOI18N
         jLabel3.setText("Rua");
-
         jTFNumero.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
         jTFNumero.setName(""); // NOI18N
         jTFNumero.addActionListener(new java.awt.event.ActionListener() {
@@ -105,19 +95,14 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
                 jTFNumeroActionPerformed(evt);
             }
         });
-
         jLabel2.setFont(new java.awt.Font("Corbel Light", 0, 12)); // NOI18N
         jLabel2.setText("Número");
-
         jLabel1.setFont(new java.awt.Font("Frank Ruhl Hofshi", 0, 36)); // NOI18N
         jLabel1.setText("Atualizar Vaga");
-
         lblIdVaga.setFont(new java.awt.Font("Corbel Light", 0, 12)); // NOI18N
         lblIdVaga.setText("Id da Vaga:");
-
         jLabel5.setFont(new java.awt.Font("Corbel Light", 0, 12)); // NOI18N
         jLabel5.setText("jLabel5");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,6 +129,18 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(63, 63, 63)
                                 .addComponent(jLabel1)))
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(lblIdVaga)
+                                    .addGap(136, 136, 136)
+                                    .addComponent(jLabel5))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jRBObliqua)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jRBParalela))))
                         .addGap(0, 92, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -189,26 +186,33 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
                     .addComponent(jBtnSalvar))
                 .addGap(28, 28, 28))
         );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
 
+        Vaga v = new Vaga();
+        VagaDAO vdao = new VagaDAO();
+        v.setIdVaga(Integer.parseInt(lblIdVaga.getText()));
+        v.setNumero(Integer.parseInt(jTFNumero.getText()));
+        v.setRua(jTFRua.getText());
+        if(jRBObliqua.isSelected()){
+            v.setObliqua(true);
+        }else if (jRBParalela.isSelected()){
+            v.setObliqua (false);   
+        }
+       vdao.update(v); 
     }//GEN-LAST:event_jBtnSalvarActionPerformed
 
     private void jTFRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFRuaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFRuaActionPerformed
-
     private void jTFNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNumeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFNumeroActionPerformed
-
     private void jRBParalelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBParalelaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRBParalelaActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -235,15 +239,15 @@ public class JFAtualizarVaga extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFAtualizarVaga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new JFAtualizarVaga().setVisible(true);
+                JFAtualizarVaga frame = new JFAtualizarVaga(idVaga);
+                frame.setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bGTipoVaga;
     private javax.swing.JButton jBtnCancelar;

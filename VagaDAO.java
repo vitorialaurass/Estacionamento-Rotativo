@@ -80,7 +80,7 @@ public class VagaDAO {
             ConnectionFactory.closeConnection(con,stmt);
         }   
         }
-
+    
     public Vaga read(int idVaga){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -89,6 +89,7 @@ public class VagaDAO {
 
         try{
             stmt = con.prepareStatement("SELECT * FROM vaga WHERE idVaga =? LIMIT1;");
+            stmt = con.prepareStatement("SELECT * FROM vaga WHERE idVaga =? LIMIT 1;");
             stmt.setInt(1,idVaga);
             rs = stmt.executeQuery();
             if(rs != null && rs.next()){
@@ -103,7 +104,7 @@ public class VagaDAO {
         }
         return v;
     } 
-
+    
     public void update(Vaga v){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -121,5 +122,5 @@ public class VagaDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-
+    
     }
