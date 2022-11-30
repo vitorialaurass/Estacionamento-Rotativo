@@ -10,6 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author 03909672035
@@ -19,9 +23,8 @@ public class VagaDAO {
     public void create(Vaga v){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-
+        
         try{
-            stmt = con.prepareStatement("INSERT INTO vaga (numero, rua, obliqua) VALUES (?,?,?) ");
             stmt = con.prepareStatement("INSERT INTO vaga (numero, rua, obliqua) VALUES (?,?,?)");
             stmt.setInt(1, v.getNumero());
             stmt.setString(2, v.getRua());
@@ -36,3 +39,29 @@ public class VagaDAO {
         }
     }
 }
+
+    public List<Vaga> read(){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Vaga> vagas = new ArrayList<>();
+
+       try{
+           stmt = con.prepareStatement("SELECT * FROM vaga;");
+           rs = stmt.executeQuery();
+           while(rs.next()){
+               Vaga v = new Vaga();
+               v.setIdVaga(rs.getInt("idVaga"));
+               v.setNumero(rs.getInt("numero"));
+               v.setRua(rs.getString("rua"));
+               v.setObliqua(rs.getBoolean("obliqua"));
+               vagas.add(v);
+           }
+       } catch (SQLException e){
+           throw new RuntimeException("Erro ao buscar os dados: ", e);
+       } finally{
+           ConnectionFactory.closeConnection(con, stmt, rs);
+       }
+        return vagas;
+       }
+    }
