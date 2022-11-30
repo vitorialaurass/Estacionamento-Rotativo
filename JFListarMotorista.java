@@ -13,7 +13,6 @@ import model.bean.Motorista;
  * @author 03909672035
  */
 public class JFListarMotorista extends javax.swing.JFrame {
-
     /**
      * Creates new form JFListarMotorista
      */
@@ -21,6 +20,7 @@ public class JFListarMotorista extends javax.swing.JFrame {
         initComponents();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,7 +29,6 @@ public class JFListarMotorista extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTMotorista = new javax.swing.JTable();
@@ -38,10 +37,19 @@ public class JFListarMotorista extends javax.swing.JFrame {
         jBtnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowStateListener(new java.awt.event.WindowStateListener() {
+            public void windowStateChanged(java.awt.event.WindowEvent evt) {
+                formWindowStateChanged(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         jLabel1.setText("Listar Motorista");
-
         jTMotorista.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTMotorista.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jTMotorista.setModel(new javax.swing.table.DefaultTableModel(
@@ -58,16 +66,13 @@ public class JFListarMotorista extends javax.swing.JFrame {
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
             };
-
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(jTMotorista);
-
         jBtnCadastrar.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jBtnCadastrar.setText("Cadastrar Motorista");
-
         jBtnEditar.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jBtnEditar.setText("Editar Motorista");
         jBtnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,10 +80,8 @@ public class JFListarMotorista extends javax.swing.JFrame {
                 jBtnEditarActionPerformed(evt);
             }
         });
-
         jBtnExcluir.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jBtnExcluir.setText("Excluir Motorista");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,13 +114,21 @@ public class JFListarMotorista extends javax.swing.JFrame {
                     .addComponent(jBtnExcluir))
                 .addContainerGap(104, Short.MAX_VALUE))
         );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnEditarActionPerformed
+
+    private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowStateChanged
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    readJTable();
+              // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
+
     public void readJTable(){
         DefaultTableModel modelo = (DefaultTableModel) jTMotorista.getModel();
         modelo.setNumRows(0);
@@ -160,7 +171,6 @@ public class JFListarMotorista extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFListarMotorista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -168,7 +178,6 @@ public class JFListarMotorista extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCadastrar;
     private javax.swing.JButton jBtnEditar;
