@@ -11,14 +11,12 @@ import model.dao.MotoristaDAO;
  * @author 03909672035
  */
 public class JFCadastrarMotorista extends javax.swing.JFrame {
-
     /**
      * Creates new form JFCadastrarMotorista
      */
     public JFCadastrarMotorista() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,7 +25,6 @@ public class JFCadastrarMotorista extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -46,54 +43,35 @@ public class JFCadastrarMotorista extends javax.swing.JFrame {
         jBtnCancelar = new javax.swing.JButton();
         jBtnLimpar = new javax.swing.JButton();
         jBtnSalvar = new javax.swing.JButton();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel1.setText("Cadastrar Motorista");
-
         jLabel2.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
         jLabel2.setText("Nome");
-
         jLabel3.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
         jLabel3.setText("Gênero");
-
         jLabel4.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
         jLabel4.setText("RG");
-
         jLabel5.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
         jLabel5.setText("CPF");
-
         jLabel6.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
         jLabel6.setText("Celular");
-
         jLabel7.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
         jLabel7.setText("E-mail");
-
         jLabel8.setFont(new java.awt.Font("Gabriola", 0, 14)); // NOI18N
         jLabel8.setText("Senha");
-
         jTFNome.setBackground(new java.awt.Color(204, 204, 204));
-
         jTFGenero.setBackground(new java.awt.Color(204, 204, 204));
-
         jTFRg.setBackground(new java.awt.Color(204, 204, 204));
-
         jTFCpf.setBackground(new java.awt.Color(204, 204, 204));
-
         jTFCelular.setBackground(new java.awt.Color(204, 204, 204));
-
         jTFEmail.setBackground(new java.awt.Color(204, 204, 204));
-
         jPFSenha.setBackground(new java.awt.Color(204, 204, 204));
         jPFSenha.setText("jPasswordField1");
-
         jBtnCancelar.setFont(new java.awt.Font("Gabriola", 0, 18)); // NOI18N
         jBtnCancelar.setText("Cancelar");
-
         jBtnLimpar.setFont(new java.awt.Font("Gabriola", 0, 18)); // NOI18N
         jBtnLimpar.setText("Limpar");
-
         jBtnSalvar.setFont(new java.awt.Font("Gabriola", 0, 18)); // NOI18N
         jBtnSalvar.setText("Salvar");
         jBtnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +79,6 @@ public class JFCadastrarMotorista extends javax.swing.JFrame {
                 jBtnSalvarActionPerformed(evt);
             }
         });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,12 +166,16 @@ public class JFCadastrarMotorista extends javax.swing.JFrame {
                     .addComponent(jBtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBtnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
          Motorista m = new Motorista();
         MotoristaDAO dao = new MotoristaDAO();
@@ -205,10 +186,8 @@ public class JFCadastrarMotorista extends javax.swing.JFrame {
         m.setCelular(Integer.parseInt(jTFCelular.getText()));
         m.setEmail(jTFEmail.getText());
         m.setSenha(jPFSenha.getText());
-
         dao.create(m);              
     }//GEN-LAST:event_jBtnSalvarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -235,7 +214,6 @@ public class JFCadastrarMotorista extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFCadastrarVaga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
