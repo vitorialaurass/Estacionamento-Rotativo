@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.dao.MotoristaDAO;
 import model.bean.Motorista;
+import model.bean.Vaga;
+import model.dao.VagaDAO;
 /**
  *
  * @author 03909672035
@@ -19,7 +21,6 @@ public class JFListarMotorista extends javax.swing.JFrame {
     public JFListarMotorista() {
         initComponents();
     }
-
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,7 +36,6 @@ public class JFListarMotorista extends javax.swing.JFrame {
         jBtnCadastrar = new javax.swing.JButton();
         jBtnEditar = new javax.swing.JButton();
         jBtnExcluir = new javax.swing.JButton();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowStateListener(new java.awt.event.WindowStateListener() {
             public void windowStateChanged(java.awt.event.WindowEvent evt) {
@@ -47,7 +47,6 @@ public class JFListarMotorista extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
-
         jLabel1.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
         jLabel1.setText("Listar Motorista");
         jTMotorista.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -80,8 +79,15 @@ public class JFListarMotorista extends javax.swing.JFrame {
                 jBtnEditarActionPerformed(evt);
             }
         });
+
         jBtnExcluir.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jBtnExcluir.setText("Excluir Motorista");
+        jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnExcluirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,15 +125,28 @@ public class JFListarMotorista extends javax.swing.JFrame {
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnEditarActionPerformed
-
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowStateChanged
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     readJTable();
               // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
+
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+    if(jTMotorista.getSelectedRow() != -1){
+             int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir o motorista selecionado?", "Exclusão", JOptionPane.YES_NO_OPTION);
+             if(opcao == 0){
+                 MotoristaDAO dao = new MotoristaDAO();
+                 Motorista m = new Motorista();
+                 m.setIdMotorista((int)jTMotorista.getValueAt(jTMotorista.getSelectedRow(), 0));
+                 dao.delete(m);
+             }
+         } else{
+             JOptionPane.showMessageDialog(null, "Selecione um motorista!", "Erro", JOptionPane.ERROR_MESSAGE);
+         }
+         readJTable();        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     public void readJTable(){
         DefaultTableModel modelo = (DefaultTableModel) jTMotorista.getModel();

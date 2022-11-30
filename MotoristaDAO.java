@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.ArrayList;
+import model.bean.Vaga;
 /**
  *
  * @author 03909672035
@@ -40,15 +41,12 @@ public class MotoristaDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-}
-
-
 public List<Motorista> read(){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Motorista> motoristas = new ArrayList<>();
-
+        
        try{
            stmt = con.prepareStatement("SELECT * FROM motorista;");
            rs = stmt.executeQuery();
@@ -72,3 +70,21 @@ public List<Motorista> read(){
        }
 
 }
+       public void delete(Motorista m){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try{
+            stmt = con.prepareStatement("DELETE FROM motorista WHERE idMotorista=?");
+            stmt.setInt(1, m.getIdMotorista());
+            stmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Motorista excluído com sucesso!");
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + e);
+        }
+        finally{
+            ConnectionFactory.closeConnection(con,stmt);
+        }   
+        }
+    }
