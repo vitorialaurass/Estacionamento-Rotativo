@@ -62,16 +62,16 @@ public class VagaDAO {
        }
         return vagas;
        }
-
+    
     public void delete(Vaga v){
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-
+        
         try{
             stmt = con.prepareStatement("DELETE FROM vaga WHERE idVaga=?");
             stmt.setInt(1, v.getIdVaga());
             stmt.executeUpdate();
-
+            
             JOptionPane.showMessageDialog(null, "Vaga excluída com sucesso!");
         } catch(SQLException e){
             JOptionPane.showMessageDialog(null, "Erro ao excluir: " + e);
@@ -80,4 +80,46 @@ public class VagaDAO {
             ConnectionFactory.closeConnection(con,stmt);
         }   
         }
+
+    public Vaga read(int idVaga){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Vaga v = new Vaga();
+
+        try{
+            stmt = con.prepareStatement("SELECT * FROM vaga WHERE idVaga =? LIMIT1;");
+            stmt.setInt(1,idVaga);
+            rs = stmt.executeQuery();
+            if(rs != null && rs.next()){
+                v.setIdVaga(rs.getInt("idVAga"));
+                v.setNumero(rs.getInt("numero"));
+                v.setObliqua(rs.getBoolean("obliqua"));
+            }
+        } catch(SQLException e){
+            throw new RuntimeException("Erro a buscar os dados ", e );
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return v;
+    } 
+
+    public void update(Vaga v){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        try{
+            stmt = con.prepareStatement("UPDATE Vaga SET numero=?, rua=?, obliqua=?  WHERE idVaga=? ");
+            stmt.setInt(1, v.getNumero());
+            stmt.setString(2, v.getRua());
+            stmt.setBoolean(3, v.isObliqua());
+            stmt.setInt(4, v.getIdVaga());
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "vaga atualizada com sucesso!");
+        } catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + e);
+        } finally{
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+
     }
