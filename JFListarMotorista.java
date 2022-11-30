@@ -79,7 +79,6 @@ public class JFListarMotorista extends javax.swing.JFrame {
                 jBtnEditarActionPerformed(evt);
             }
         });
-
         jBtnExcluir.setFont(new java.awt.Font("Corbel Light", 0, 14)); // NOI18N
         jBtnExcluir.setText("Excluir Motorista");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +86,6 @@ public class JFListarMotorista extends javax.swing.JFrame {
                 jBtnExcluirActionPerformed(evt);
             }
         });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,9 +120,19 @@ public class JFListarMotorista extends javax.swing.JFrame {
         );
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
     private void jBtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnEditarActionPerformed
         // TODO add your handling code here:
+        if(jTMotorista.getSelectedRow() != -1){
+            int motoristaSelecionado = (int) jTMotorista.getValueAt(jTMotorista.getSelectedRow(), 0);
+            JFAtualizarMotorista am = new JFAtualizarMotorista(motoristaSelecionado);
+            am.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um Motorista!", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        readJTable();
     }//GEN-LAST:event_jBtnEditarActionPerformed
+
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowStateChanged
@@ -132,7 +140,6 @@ public class JFListarMotorista extends javax.swing.JFrame {
     readJTable();
               // TODO add your handling code here:
     }//GEN-LAST:event_formWindowOpened
-
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
     if(jTMotorista.getSelectedRow() != -1){
              int opcao = JOptionPane.showConfirmDialog(null, "Deseja excluir o motorista selecionado?", "Exclusão", JOptionPane.YES_NO_OPTION);
@@ -147,7 +154,7 @@ public class JFListarMotorista extends javax.swing.JFrame {
          }
          readJTable();        // TODO add your handling code here:
     }//GEN-LAST:event_jBtnExcluirActionPerformed
-
+    
     public void readJTable(){
         DefaultTableModel modelo = (DefaultTableModel) jTMotorista.getModel();
         modelo.setNumRows(0);
@@ -159,6 +166,7 @@ public class JFListarMotorista extends javax.swing.JFrame {
             m.getGenero(),
             m.getRg(),  
             m.getCpf(),
+            m.getCelular(),
             m.getEmail(),
             m.getSenha()
         });
